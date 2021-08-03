@@ -78,8 +78,12 @@ class App extends React.Component {
 				<Button onClick={this.irParaHome}><Img src="https://rude-yoke.surge.sh/static/media/ninjaIconOutline.8ba90ce1.png"></Img>Labeninjas</Button>
 				<Button onClick={this.irParaCarrinho}>Carrinho</Button>
 			</Header>
+			
 
+
+		
 			{this.mostraTela()}
+
 			
 			</div>
 		)
