@@ -48,7 +48,7 @@ class Cadastro extends React.Component {
     state={
         titulo:"",
         descricao:"",
-        preco:"",
+        preco:'',
         formaDePagamento:[],
         data:""
     }
@@ -77,19 +77,21 @@ class Cadastro extends React.Component {
     criarServiço = (e) => {
         const body = {
             title:this.state.titulo,
-            description:this.state,
-            price:this.state.preco,
-            paymentMethods:this.state.formaDePagamento,
+            description:this.state.descricao,
+            price:parseInt(this.state.preco),
+            paymentMethods:[this.state.formaDePagamento],
             dueDate:this.state.data
         };
 
-        Axios.post(baseUrl,headerPostman,body)
+        console.log(body)
+
+
+        Axios.post(`${baseUrl}/jobs`, body, headerPostman)
         .then(() => {
             alert('serviço cadastrado')
         }).catch(err =>{
             console.log(err)
         });
-        this.setState({titulo:""});
     };
 
 
@@ -121,7 +123,7 @@ class Cadastro extends React.Component {
                     <Inputs 
                     value={this.state.preco}
                     onChange={this.criarPreco}
-                    type="number"
+                    type="Number"
                     placeholder="Preço"
                     />
                     
@@ -144,7 +146,7 @@ class Cadastro extends React.Component {
                     placeholder="Prazo do Serviço" 
                     type="date" />
 
-                    <Buttons>CADASTRAR SERVIÇO</Buttons>
+                    <Buttons onClick={this.criarServiço}>CADASTRAR SERVIÇO</Buttons>
                    
                     
                 </ContainerInputs>
