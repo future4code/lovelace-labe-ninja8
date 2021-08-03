@@ -43,8 +43,8 @@ class Home extends React.Component {
             </ContainerHome>
 
             <ContainerButtons>
-                <Buttons>QUERO SER UM NINJA</Buttons>
-                <Buttons>CONTRATAR UM NINJA</Buttons>
+                <Buttons onClick={this.props.irParaCadastro}>QUERO SER UM NINJA</Buttons>
+                <Buttons onClick={this.props.irParaBuscaServicos}>CONTRATAR UM NINJA</Buttons>
             </ContainerButtons>
 
             </ContainerPrincipal>

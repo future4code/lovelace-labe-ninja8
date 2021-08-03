@@ -30,18 +30,60 @@ padding: 13px;
 
 class App extends React.Component {
 
+	state = { 
+		telaAtual: "home"
+	}
+
+	mostraTela =()=>{
+		switch(this.state.telaAtual){
+		case "home":
+			return <Home irParaCadastro={this.irParaCadastro} irParaBuscaServicos={this.irParaBuscaServicos} />
+		case "cadastro":
+			return <Cadastro  />
+		case "buscar-servicos":
+			return <BuscarServiços/>
+		case "carrinho":
+			return <Carrinho/>
+		default: 
+		return <div>Erro Página não encontrada! Tente novamente</div>
+		
+	}
+	}
+
+	irParaHome =()=>{
+		this.setState({telaAtual:"home"})
+	}
+
+	irParaCadastro =()=>{
+		this.setState({telaAtual:"cadastro"})
+	}
+	
+
+	irParaBuscaServicos =()=>{
+		this.setState({telaAtual:"buscar-servicos"})
+	}
+
+	irParaCarrinho =()=>{
+		this.setState({telaAtual:"carrinho"})
+	}
+
+
+
 	render ()
 	 {
 		return (
 
 			<div>
 			<Header>
-				<Button><Img src="https://rude-yoke.surge.sh/static/media/ninjaIconOutline.8ba90ce1.png"></Img>Labeninjas</Button>
-				<Button>Carrinho</Button>
+				<Button onClick={this.irParaHome}><Img src="https://rude-yoke.surge.sh/static/media/ninjaIconOutline.8ba90ce1.png"></Img>Labeninjas</Button>
+				<Button onClick={this.irParaCarrinho}>Carrinho</Button>
 			</Header>
 			
 
+
 		
+			{this.mostraTela()}
+
 			
 			</div>
 		)
