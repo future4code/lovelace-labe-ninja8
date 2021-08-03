@@ -39,8 +39,9 @@ class App extends React.Component {
 				<Button><Img src="https://rude-yoke.surge.sh/static/media/ninjaIconOutline.8ba90ce1.png"></Img>Labeninjas</Button>
 				<Button>Carrinho</Button>
 			</Header>
+			
 
-			<VerDetalhes />
+		
 			
 			</div>
 		)

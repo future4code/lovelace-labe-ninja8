@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Axios from 'axios'
+import { baseUrl, headerPostman } from "./constants"
 
 const ContainerPrincipal = styled.div`
 background-color: #F5F5FD;
@@ -42,8 +43,56 @@ border: solid 1px #7C66C5;
 border-radius: 5px;
 cursor: pointer;
 `
-
+     
 class Cadastro extends React.Component {
+    state={
+        titulo:"",
+        descricao:"",
+        preco:"",
+        formaDePagamento:[],
+        data:""
+    }
+    
+    criarTitulo=(e)=>{
+        this.setState({titulo: e.target.value})
+    }
+
+    criarDescricao=(e)=>{
+        this.setState({descricao:e.target.value})
+    }
+    
+    criarPreco=(e)=>{
+        this.setState({preco:e.target.value})
+    }
+
+    criarFromaDePagamento=(e)=>{
+        this.setState({formaDePagamento:e.target.value})
+    }
+
+    criarData=(e)=>{
+        this.setState({data:e.target.value})
+    }
+
+
+    criarServiço = (e) => {
+        const body = {
+            title:this.state.titulo,
+            description:this.state,
+            price:this.state.preco,
+            paymentMethods:this.state.formaDePagamento,
+            dueDate:this.state.data
+        };
+
+        Axios.post(baseUrl,headerPostman,body)
+        .then(() => {
+            alert('serviço cadastrado')
+        }).catch(err =>{
+            console.log(err)
+        });
+        this.setState({titulo:""});
+    };
+
+
 
     render () {
 
@@ -55,12 +104,32 @@ class Cadastro extends React.Component {
                 </Titulo>
 
                 <ContainerInputs>
-                    <Inputs placeholder="Título"/>
-                    <Inputs placeholder="Descrição"/>
-                    <Inputs placeholder="Preço"/>
+                    <Inputs
+                    value={this.state.titulo}
+                    onChange={this.criarTitulo}
+                    placeholder="Título"
+                    type="text"
+                    />
+
+                    <Inputs 
+                     value={this.state.descricao}
+                     onChange={this.criarDescricao}
+                     placeholder="Descrição"
+                     type="text"
+                    />
+
+                    <Inputs 
+                    value={this.state.preco}
+                    onChange={this.criarPreco}
+                    type="number"
+                    placeholder="Preço"
+                    />
                     
                    
-                         <Select>
+                         <Select 
+                         value={this.state.formaDePagamento}
+                         onChange={this.criarFromaDePagamento}
+                         >
                             <option selected>Forma de Pagamento:</option>
                             <option>Cartão de Crédito</option>
                             <option>Cartão de Débito</option>
@@ -69,7 +138,11 @@ class Cadastro extends React.Component {
                             <option>Boleto</option>
                          </Select>
                     
-                    <Inputs placeholder="Prazo do Serviço" type="date" />
+                    <Inputs
+                    value={this.state.data}
+                    onChange={this.criarData}
+                    placeholder="Prazo do Serviço" 
+                    type="date" />
 
                     <Buttons>CADASTRAR SERVIÇO</Buttons>
                    
