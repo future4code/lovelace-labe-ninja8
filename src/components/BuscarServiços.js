@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Axios from 'axios'
 import CardServiços from './CardServiços'
 import { baseUrl, headerPostman } from "./constants"
+import VerDetalhes from './VerDetalhes'
 
 const ContainerPrincipal = styled.div`
 background-color: #F5F5FD;
@@ -49,8 +50,10 @@ class BuscarServiços extends React.Component {
         minFilter: '',
         maxFilter: '',
         nameFilter: '',
-        ordenacao: ''
+        ordenacao: '',
+      estadotela: "todos"
     }
+
 
     onChangeMinFilter = (event) => {
         this.setState({minFilter: event.target.value})
@@ -67,6 +70,28 @@ class BuscarServiços extends React.Component {
       onChangeOrdenacao = (event) => {
           this.setState({ordenacao: event.target.value})
       }
+  
+    mostraTela =()=>{
+		switch(this.state.estadotela){
+		case "todos":
+			return <CardServiços irParaDetalhes={this.irParaDetalhes} />
+		case "detalhado":
+			return <VerDetalhes irParaTodos={this.irParaTodos}  />
+		default: 
+		return <div>Erro Página não encontrada! Tente novamente</div>
+        }
+		
+	}
+
+    irParaTodos =()=>{
+		this.setState({estadotela:"todos"})
+	}
+
+    irParaDetalhes =()=>{
+		this.setState({estadotela:"detalhado"})
+	}
+
+    
     render () {
 
         return (
@@ -90,7 +115,7 @@ class BuscarServiços extends React.Component {
        
             </ContainerInputs> 
 
-            <CardServiços />
+            {this.mostraTela()}
 
             </ContainerPrincipal>
 
