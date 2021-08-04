@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
+import { baseUrl, headerPostman } from "./constants"
 
 const ContainerPrincipal = styled.div`
 display:grid;
@@ -36,13 +37,36 @@ color: #7C66C5;
 
 
 class CardServiços extends React.Component {
-
+    state={
+     servicos:[],
+           
+    }
+       todosServicos = () => {
+        axios.get(`${baseUrl}/jobs`, headerPostman)
+        .then(response => {
+            this.setState({servico:response.data.jobs})
+            console.log(response.data.jobs)
+        }).catch(err => {
+            console.log(err)
+        })
+    };
     render () {
-
+       const listaTodosOsServicos= this.state.servicos.map((serv)=>{
+           return <Card key={serv.id}>
+               {serv.title}
+               </Card>
+    
+               
+           
+       })
         return (
+            
 
             <ContainerPrincipal> 
-            <Card>
+               
+                <button onClick={this.todosServicos}>Teste</button>
+            <Card >
+
             <Titulo>
                 <h1>Serviço</h1>
             </Titulo>
@@ -84,6 +108,7 @@ class CardServiços extends React.Component {
             </div>
             
             </Card>
+            {listaTodosOsServicos}
 
             
 
