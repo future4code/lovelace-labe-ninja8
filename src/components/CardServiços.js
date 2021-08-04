@@ -37,81 +37,59 @@ color: #7C66C5;
 
 
 class CardServiços extends React.Component {
-    state={
+    
+    state = {
+
      servicos:[],
            
     }
-       todosServicos = () => {
+
+    componentDidMount () {
+        this.todosServicos()
+     
+    }
+
+    todosServicos = () => {
+
         axios.get(`${baseUrl}/jobs`, headerPostman)
+
         .then(response => {
-            this.setState({servico:response.data.jobs})
-            console.log(response.data.jobs)
+            this.setState({servicos:response.data.jobs})
+            
+
         }).catch(err => {
             console.log(err)
         })
     };
+
     render () {
-       const listaTodosOsServicos= this.state.servicos.map((serv)=>{
-           return <Card key={serv.id}>
-               {serv.title}
-               </Card>
-    
+
+        const listaTodosOsServicos= this.state.servicos.map((serv)=>{
+           return <Card key= {serv.id}>
+           <Titulo>
+               <h1>{serv.title}</h1>
+               <hr />
+           </Titulo>
+           <div>
+               <p><strong>Descrição:</strong> {serv.description}</p>
+               <p><strong>Prazo:</strong> {serv.dueDate}</p>
+               <p><strong>Froma de Pagamento:</strong> {serv.paymentMethods}</p>
+               <p><strong>Valor:</strong> {serv.price}</p>
                
-           
+           </div>
+           <div>
+               <Buttons>Adicionar ao carrinho</Buttons>
+               <Buttons>Ver detalhes</Buttons>
+           </div> 
+           </Card>
+                   
        })
         return (
             
-
             <ContainerPrincipal> 
-               
-                <button onClick={this.todosServicos}>Teste</button>
-            <Card >
 
-            <Titulo>
-                <h1>Serviço</h1>
-            </Titulo>
-            <div>
-                <p>Preço:</p>
-                <p>Prazo:</p>
-            </div>
-            <div>
-                <Buttons>Adicionar ao carrinho</Buttons>
-                <Buttons>Ver detalhes</Buttons>
-            </div>
-            </Card>
-
-            <Card>
-            <Titulo>
-                <h1>Serviço</h1>
-            </Titulo>
-            <div>
-                <p>Preço:</p>
-                <p>Prazo:</p>
-            </div>
-            <div>
-                <Buttons>Adicionar ao carrinho</Buttons>
-                <Buttons>Ver detalhes</Buttons>
-            </div>
-            </Card>
-
-            <Card>
-            <Titulo>
-                <h1>Serviço</h1>
-            </Titulo>
-            <div>
-                <p>Preço:</p>
-                <p>Prazo:</p>
-            </div>
-            <div>
-                <Buttons>Adicionar ao carrinho</Buttons>
-                <Buttons>Ver detalhes</Buttons>
-            </div>
-            
-            </Card>
-            {listaTodosOsServicos}
-
-            
-
+                {listaTodosOsServicos}
+           
             </ContainerPrincipal>
         )   
     }
