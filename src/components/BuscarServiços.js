@@ -42,13 +42,35 @@ border: solid 1px #7C66C5;
 border-radius: 5px;
 `
 
+  
+
 
 class BuscarServiços extends React.Component {
+    state={
+        minFilter: '',
+        maxFilter: '',
+        nameFilter: '',
+        ordenacao: '',
+      estadotela: "todos"
+    }
 
-    state = { 
-		estadotela: "todos"
-	}
 
+    onChangeMinFilter = (event) => {
+        this.setState({minFilter: event.target.value})
+      }
+    
+      onChangeMaxFilter = (event) => {
+        this.setState({maxFilter: event.target.value})
+      }
+    
+      onChangeNameFilter = (event) => {
+        this.setState({nameFilter: event.target.value})
+      }
+      
+      onChangeOrdenacao = (event) => {
+          this.setState({ordenacao: event.target.value})
+      }
+  
     mostraTela =()=>{
 		switch(this.state.estadotela){
 		case "todos":
@@ -70,7 +92,6 @@ class BuscarServiços extends React.Component {
 	}
 
     
-
     render () {
 
         return (
@@ -80,10 +101,11 @@ class BuscarServiços extends React.Component {
             <InputBuscar placeholder="Buscar"/>
            
             <ContainerInputs>
-                <Inputs placeholder="Valor mínimo"/>
-                <Inputs placeholder="Valor máximo"/>
+           
+                <Inputs onChange={this.onChangeMinFilter}  value={this.state.minFilter} type="number" placeholder="Valor mínimo"/>
+                <Inputs value={this.state.maxFilter} onChange={this.onChangeMaxFilter}  type="number" placeholder="Valor máximo"/>
                 
-            <Select>
+            <Select onChange={this.onChangeOrdenacao} value={this.state.ordenacao}>
               <option selected>Ordenação</option>
               <option>Maior valor</option>
               <option>Menor valor</option>
