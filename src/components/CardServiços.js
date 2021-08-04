@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import axios from 'axios'
 import { baseUrl, headerPostman } from "./constants"
 
+
 const ContainerPrincipal = styled.div`
 display:grid;
 grid-template-columns: 1fr 1fr 1fr;
@@ -41,6 +42,7 @@ class CardServiços extends React.Component {
     state = {
 
      servicos:[],
+     
            
     }
 
@@ -61,6 +63,8 @@ class CardServiços extends React.Component {
             console.log(err)
         })
     };
+    
+   
 
     render () {
 
@@ -79,7 +83,7 @@ class CardServiços extends React.Component {
            </div>
            <div>
                <Buttons>Adicionar ao carrinho</Buttons>
-               <Buttons>Ver detalhes</Buttons>
+               <Buttons onClick={this.props.irParaDetalhes}>Ver detalhes</Buttons>
            </div> 
            </Card>
                    

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import axios from 'axios'
 import { baseUrl, headerPostman } from "./constants"
 
+
 const ContainerPrincipal = styled.div`
 background-color: #F5F5FD;
 text-align: center;
@@ -47,7 +48,7 @@ class VerDetalhes extends React.Component {
             
             <div>
                 <Buttons>Adicionar ao Carrinho</Buttons>
-                <Buttons>Voltar para a Lista</Buttons>
+                <Buttons onClick={this.props.irParaTodos}>Voltar para a Lista</Buttons>
             </div>
 
             </ContainerPrincipal>
