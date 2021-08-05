@@ -4,6 +4,7 @@ import Axios from 'axios'
 import CardServiços from './CardServiços'
 import { baseUrl, headerPostman } from "./constants"
 import VerDetalhes from './VerDetalhes'
+import App from '../App'
 
 const ContainerPrincipal = styled.div`
 background-color: #F5F5FD;
@@ -46,14 +47,6 @@ border-radius: 5px;
 
 
 class BuscarServiços extends React.Component {
-    state={
-        minFilter: '',
-        maxFilter: '',
-        nameFilter: '',
-        ordenacao: '',
-      estadotela: "todos"
-    }
-
 
     onChangeMinFilter = (event) => {
         this.setState({minFilter: event.target.value})
@@ -72,9 +65,12 @@ class BuscarServiços extends React.Component {
       }
   
     mostraTela =()=>{
-		switch(this.state.estadotela){
+		switch(this.props.state.estadotela){
 		case "todos":
-			return <CardServiços irParaDetalhes={this.irParaDetalhes} />
+			return <CardServiços 
+      setState={this.setState}
+      state={this.props.state}
+      irParaDetalhes={this.irParaDetalhes} />
 		case "detalhado":
 			return <VerDetalhes irParaTodos={this.irParaTodos}  />
 		default: 
@@ -90,9 +86,20 @@ class BuscarServiços extends React.Component {
     irParaDetalhes =()=>{
 		this.setState({estadotela:"detalhado"})
 	}
+     
+  ordenacaoLista=()=>{
+  
+  }
 
     
     render () {
+   const{maxFilter,minFilter,ordenacao,servicos}=this.props
+
+     const filtroCrescente=servicos.map((cresc)=>{
+       return 
+       
+     }
+
 
         return (
 
@@ -102,10 +109,19 @@ class BuscarServiços extends React.Component {
            
             <ContainerInputs>
            
-                <Inputs onChange={this.onChangeMinFilter}  value={this.state.minFilter} type="number" placeholder="Valor mínimo"/>
-                <Inputs value={this.state.maxFilter} onChange={this.onChangeMaxFilter}  type="number" placeholder="Valor máximo"/>
+                <Inputs onChange={this.onChangeMinFilter}  
+                value={minFilter} 
+                type="number"
+                 placeholder="Valor mínimo"
+                 />
+                <Inputs 
+                value={maxFilter} 
+                onChange={this.onChangeMaxFilter}  
+                type="number" placeholder="Valor máximo"
+                />
                 
-            <Select onChange={this.onChangeOrdenacao} value={this.state.ordenacao}>
+            <Select onChange={this.onChangeOrdenacao} 
+            value={ordenacao}>
               <option selected>Ordenação</option>
               <option>Maior valor</option>
               <option>Menor valor</option>

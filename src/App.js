@@ -7,6 +7,8 @@ import BuscarServiços from './components/BuscarServiços'
 import Carrinho from './components/Carrinho'
 import CardServiços from './components/CardServiços'
 import VerDetalhes from './components/VerDetalhes'
+import { baseUrl, headerPostman } from './components/constants'
+
 
 const Header = styled.div `
 background-color:#7C66C5;
@@ -31,17 +33,51 @@ padding: 13px;
 class App extends React.Component {
 
 	state = { 
-		telaAtual: "home"
+		telaAtual: "home",
+		minFilter: '',
+		maxFilter: '',
+		nameFilter: '',
+    ordenacao: '',
+
+		estadotela: "todos",
+		servicos:[],
+
+		titulo:"",
+		descricao:"",
+		preco:'',
+		formaDePagamento:[],
+		data:"",
+	
+		}
+
+		componentDidMount () {
+			this.todosServicos()
+	 
 	}
+
+	todosServicos = () => {
+
+			axios.get(`${baseUrl}/jobs`, headerPostman)
+
+			.then(response => {
+					console.log(response.data)
+					this.setState({servicos:response.data.jobs})
+					
+
+			}).catch(err => {
+					console.log(err)
+			})
+	};
 
 	mostraTela =()=>{
 		switch(this.state.telaAtual){
 		case "home":
 			return <Home irParaCadastro={this.irParaCadastro} irParaBuscaServicos={this.irParaBuscaServicos} />
 		case "cadastro":
-			return <Cadastro  />
+			return <Cadastro state={this.state} />
 		case "buscar-servicos":
-			return <BuscarServiços/>
+			return <BuscarServiços state={this.state}
+			setState={this.setState}/>
 		case "carrinho":
 			return <Carrinho/>
 		default: 
