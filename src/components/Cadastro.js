@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Axios from 'axios'
 import { baseUrl, headerPostman } from "./constants"
+import App from '../App'
 
 const ContainerPrincipal = styled.div`
 background-color: #F5F5FD;
@@ -45,14 +46,7 @@ cursor: pointer;
 `
      
 class Cadastro extends React.Component {
-    state={
-        titulo:"",
-        descricao:"",
-        preco:'',
-        formaDePagamento:[],
-        data:""
-    }
-    
+ 
     criarTitulo=(e)=>{
         this.setState({titulo: e.target.value})
     }
@@ -98,6 +92,7 @@ class Cadastro extends React.Component {
 
     render () {
 
+        const {titulo,descricao,preco,data,formaDePagamento}= this.props
         return (
             <ContainerPrincipal> 
 
@@ -107,21 +102,21 @@ class Cadastro extends React.Component {
 
                 <ContainerInputs>
                     <Inputs
-                    value={this.state.titulo}
+                    value={titulo}
                     onChange={this.criarTitulo}
                     placeholder="Título"
                     type="text"
                     />
 
                     <Inputs 
-                     value={this.state.descricao}
+                     value={descricao}
                      onChange={this.criarDescricao}
                      placeholder="Descrição"
                      type="text"
                     />
 
                     <Inputs 
-                    value={this.state.preco}
+                    value={preco}
                     onChange={this.criarPreco}
                     type="Number"
                     placeholder="Preço"
@@ -129,7 +124,7 @@ class Cadastro extends React.Component {
                     
                    
                          <Select 
-                         value={this.state.formaDePagamento}
+                         value={formaDePagamento}
                          onChange={this.criarFromaDePagamento}
                          >
                             <option selected>Forma de Pagamento:</option>
@@ -141,7 +136,7 @@ class Cadastro extends React.Component {
                          </Select>
                     
                     <Inputs
-                    value={this.state.data}
+                    value={data}
                     onChange={this.criarData}
                     placeholder="Prazo do Serviço" 
                     type="date" />
