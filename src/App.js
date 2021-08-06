@@ -33,11 +33,12 @@ padding: 13px;
 class App extends React.Component {
 
 	state = { 
+
 		telaAtual: "home",
 		minFilter: '',
 		maxFilter: '',
 		nameFilter: '',
-    ordenacao: '',
+    	ordenacao: '',
 
 		estadotela: "todos",
 		servicos:[],
@@ -117,8 +118,6 @@ class App extends React.Component {
 				<Button onClick={this.irParaCarrinho}>Carrinho</Button>
 			</Header>
 			
-
-
 		
 			{this.mostraTela()}
 

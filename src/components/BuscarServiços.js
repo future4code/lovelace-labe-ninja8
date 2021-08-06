@@ -43,7 +43,6 @@ border: solid 1px #7C66C5;
 border-radius: 5px;
 `
 
-  
 
 
 class BuscarServiços extends React.Component {
@@ -93,14 +92,10 @@ class BuscarServiços extends React.Component {
 
     
     render () {
-   const{maxFilter,minFilter,ordenacao,servicos}=this.props
+      
+      const{maxFilter,minFilter,ordenacao,servicos}=this.props
 
-     const filtroCrescente=servicos.map((cresc)=>{
-       return 
-       
-     }
-
-
+ 
         return (
 
             <ContainerPrincipal>
