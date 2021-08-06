@@ -69,9 +69,11 @@ class BuscarServiços extends React.Component {
 			return <CardServiços 
       setState={this.setState}
       state={this.props.state}
-      irParaDetalhes={this.irParaDetalhes} />
+      irParaDetalhes={this.irParaDetalhes} 
+      />
 		case "detalhado":
-			return <VerDetalhes irParaTodos={this.irParaTodos}  />
+			return <VerDetalhes irParaTodos={this.irParaTodos} 
+       />
 		default: 
 		return <div>Erro Página não encontrada! Tente novamente</div>
         }
@@ -92,10 +94,10 @@ class BuscarServiços extends React.Component {
 
     
     render () {
-      
-      const{maxFilter,minFilter,ordenacao,servicos}=this.props
+   const{maxFilter,minFilter,ordenacao,servicos}=this.props
 
- 
+    
+
         return (
 
             <ContainerPrincipal>
